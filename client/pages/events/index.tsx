@@ -1,13 +1,13 @@
-import type {NextPage} from "next";
+import React from "react";
 
 import HeaderLayout from "@components/HeaderLayout";
 
-const Home: NextPage = () => {
+const Events = () => {
   return (
     <HeaderLayout>
-      <h1>Homepage</h1>
+      <div>Events page</div>
     </HeaderLayout>
   );
 };
 
-export default Home;
+export default Events;
