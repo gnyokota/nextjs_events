@@ -3,7 +3,7 @@
   justify-content: space-around;
   align-items: center;
   margin: 20px 0;
-  padding: 13px;
+  padding: 20px;
   box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.1);
 }
 
@@ -13,6 +13,16 @@
 
 .info {
   flex: 2;
+}
+
+.btn {
+  background-color: #e90064;
+  padding: 10px 20px;
+  border-radius: 4px;
+}
+
+.btn a {
+  color: white !important;
 }
 
 @media (max-width: 600px) {

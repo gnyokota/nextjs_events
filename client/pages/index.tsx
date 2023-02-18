@@ -5,7 +5,7 @@ import {Data} from "./api/events";
 import HeaderLayout from "@components/Layout";
 import EventItem from "@components/EventItem";
 
-const Home: NextPage = ({data}: {data: Data[]}) => {
+const Home = ({data}: {data: Data[]}) => {
   return (
     <HeaderLayout>
       <div>

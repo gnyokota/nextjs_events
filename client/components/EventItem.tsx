@@ -4,6 +4,7 @@ import {Data} from "pages/api/events";
 import Image from "next/image";
 
 import styles from "@styles/EventItem.module.css";
+import Link from "next/link";
 
 const EventItem = ({event}: {event: Data}) => {
   return (
@@ -21,6 +22,9 @@ const EventItem = ({event}: {event: Data}) => {
           {event.date} at {event.time}
         </span>
         <h3>{event.name}</h3>
+      </div>
+      <div className={styles.btn}>
+        <Link href={`/events/${event.slug}`}>Details</Link>
       </div>
     </div>
   );
