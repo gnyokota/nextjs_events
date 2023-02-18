@@ -1,7 +1,7 @@
 import {useRouter} from "next/router";
 import React from "react";
 
-import HeaderLayout from "@components/HeaderLayout";
+import HeaderLayout from "@components/Layout";
 
 const SingleEvent = () => {
   const router = useRouter();

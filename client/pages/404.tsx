@@ -2,7 +2,7 @@ import Link from "next/link";
 import React from "react";
 import {FaExclamationTriangle} from "react-icons/fa";
 
-import HeaderLayout from "@components/HeaderLayout";
+import HeaderLayout from "@components/Layout";
 
 import styles from "@styles/NotFound.module.css";
 

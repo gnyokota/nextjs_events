@@ -1,10 +1,12 @@
 import Head from "next/head";
+import {useRouter} from "next/router";
 import React from "react";
 
 import Header from "./Header";
 import Footer from "./Footer";
 
 import styles from "@styles/Layout.module.css";
+import Showcase from "./Showcase";
 
 type Props = {
   title?: string;
@@ -19,6 +21,7 @@ const HeaderLayout = ({
   description = "Find the latest city events",
   children,
 }: Props) => {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -27,6 +30,7 @@ const HeaderLayout = ({
         <meta name="keywords" content={keywords} />
       </Head>
       <Header />
+      {router.pathname === "/" && <Showcase />}
       <div className={styles.container}>{children}</div>
       <Footer />
     </>

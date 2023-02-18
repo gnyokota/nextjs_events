@@ -1,6 +1,6 @@
 import React from "react";
 
-import HeaderLayout from "@components/HeaderLayout";
+import HeaderLayout from "@components/Layout";
 
 const AddEvent = () => {
   return (
