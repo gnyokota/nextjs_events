@@ -1,0 +1,36 @@
+.event {
+  position: relative;
+  padding-top: 40px;
+}
+
+.event h3 {
+  font-size: 25px;
+}
+
+.event p {
+  margin: 10px 0;
+}
+
+.image {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.controls {
+  position: absolute;
+  right: 30px;
+  top: 0;
+}
+
+.delete {
+  margin-left: 20px;
+  color: #e90064;
+}
+
+.back {
+  display: block;
+  margin-top: 40px;
+  margin-right: 20px;
+  text-align: right;
+}
