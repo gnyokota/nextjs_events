@@ -1,20 +1,21 @@
-import type {NextPage} from "next";
+import {useSelector} from "react-redux";
+import Link from "next/link";
 
 import {Data} from "./api/events";
-
 import HeaderLayout from "@components/Layout";
 import EventItem from "@components/EventItem";
-import Link from "next/link";
 import {wrapper} from "../store/store";
-import {fetchRequest} from "../store/actions";
+import {fetchData} from "../store/actions";
 
-const Home = ({data}: {data: Data[]}) => {
+const Home = () => {
+  const {data} = useSelector((state: any) => state.data.reducer);
+
   return (
     <HeaderLayout>
       <div>
         <div>
           <h1>Upcoming events</h1>
-          {data.length ? (
+          {data?.length ? (
             data.map((event: Data) => (
               <EventItem key={event.id} event={event} />
             ))
@@ -23,7 +24,7 @@ const Home = ({data}: {data: Data[]}) => {
           )}
         </div>
         <div className="btn-wrapper">
-          {data.length > 0 && (
+          {data?.length > 0 && (
             <Link className="btn-secondary" href="/events">
               See more events
             </Link>
@@ -36,7 +37,12 @@ const Home = ({data}: {data: Data[]}) => {
 
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
-    store.dispatch(fetchRequest());
+    const res = await fetch("http://localhost:3000/api/events");
+    const evts = await res.json();
+    await store.dispatch(fetchData(evts));
+    return {
+      props: {},
+    };
   }
 );
 

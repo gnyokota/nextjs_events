@@ -1,10 +1,10 @@
 import {Data} from "pages/api/events";
 
-type InitialState = {
+export type InitialState = {
   data: Data[];
 };
 
-type Action = {
+export type Action = {
   type: string;
   payload?: Data[];
 };

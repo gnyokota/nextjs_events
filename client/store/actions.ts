@@ -14,11 +14,9 @@ const fetchRequestError = () => ({
   type: "FETCH_REQUEST_ERROR",
 });
 
-export const fetchData = () => async (dispatch: Dispatch) => {
+export const fetchData = (evts: any) => async (dispatch: Dispatch) => {
   try {
     dispatch(fetchRequest());
-    const res = await fetch("http://localhost:3000/api/events");
-    const evts = await res.json();
     dispatch(fetchPostSuccess(evts));
   } catch (error) {
     dispatch(fetchRequestError());
