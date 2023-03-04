@@ -5,6 +5,8 @@ import {Data} from "./api/events";
 import HeaderLayout from "@components/Layout";
 import EventItem from "@components/EventItem";
 import Link from "next/link";
+import {wrapper} from "../store/store";
+import {fetchRequest} from "../store/actions";
 
 const Home = ({data}: {data: Data[]}) => {
   return (
@@ -32,15 +34,10 @@ const Home = ({data}: {data: Data[]}) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  const res = await fetch("http://localhost:3000/api/events");
-  const evts = await res.json();
-
-  return {
-    props: {
-      data: evts.slice(0, 2),
-    },
-  };
-};
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async () => {
+    store.dispatch(fetchRequest());
+  }
+);
 
 export default Home;

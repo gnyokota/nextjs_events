@@ -1,7 +1,7 @@
 import {Data} from "pages/api/events";
 import {Dispatch} from "redux";
 
-const fetchRequest = () => ({
+export const fetchRequest = () => ({
   type: "FETCH_REQUEST",
 });
 
