@@ -39,7 +39,7 @@ export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
     const res = await fetch("http://localhost:3000/api/events");
     const evts = await res.json();
-    await store.dispatch(fetchData(evts));
+    await store.dispatch(fetchData(evts) as any);
     return {
       props: {},
     };
