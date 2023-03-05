@@ -1,10 +1,15 @@
 import React from "react";
+import {useSelector} from "react-redux";
 
 import HeaderLayout from "@components/Layout";
 import EventItem from "@components/EventItem";
 import {Data} from "pages/api/events";
+import {wrapper} from "../../store/store";
+import {fetchData} from "../../store/actions";
 
-const Events = ({data}: {data: Data[]}) => {
+const Events = () => {
+  const {data} = useSelector((state: any) => state);
+
   return (
     <HeaderLayout>
       <div>
@@ -19,15 +24,16 @@ const Events = ({data}: {data: Data[]}) => {
   );
 };
 
-export const getServerSideProps = async () => {
-  const res = await fetch(`http://localhost:3000/api/events`);
-  const evts = await res.json();
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async () => {
+    const res = await fetch(`http://localhost:3000/api/events`);
+    const evts = await res.json();
+    await store.dispatch(fetchData(evts) as any);
 
-  return {
-    props: {
-      data: evts,
-    },
-  };
-};
+    return {
+      props: {},
+    };
+  }
+);
 
 export default Events;

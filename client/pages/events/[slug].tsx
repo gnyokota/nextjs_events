@@ -12,7 +12,7 @@ import {fetchData} from "../../store/actions";
 import styles from "@styles/EventSlug.module.css";
 
 const SingleEvent = () => {
-  const {data} = useSelector((state: any) => state.data.reducer);
+  const {data} = useSelector((state: any) => state);
 
   return (
     <HeaderLayout>

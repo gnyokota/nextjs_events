@@ -8,7 +8,7 @@ import {wrapper} from "../store/store";
 import {fetchData} from "../store/actions";
 
 const Home = () => {
-  const {data} = useSelector((state: any) => state.data.reducer);
+  const {data} = useSelector((state: any) => state);
 
   return (
     <HeaderLayout>
