@@ -1,46 +1,52 @@
 import React from "react";
+import {useSelector} from "react-redux";
 import {FaPencilAlt, FaTimes} from "react-icons/fa";
 import Link from "next/link";
 import Image from "next/image";
 
 import HeaderLayout from "@components/Layout";
 import {Data} from "pages/api/events";
+import {wrapper} from "../../store/store";
+import {fetchData} from "../../store/actions";
 
 import styles from "@styles/EventSlug.module.css";
 
-const SingleEvent = ({data}: {data: Data}) => {
-  const deleteEvent = () => {
-    console.log("delete");
-  };
+const SingleEvent = () => {
+  const {data} = useSelector((state: any) => state.data.reducer);
+
   return (
     <HeaderLayout>
       <div className={styles.event}>
         <div className={styles.controls}>
-          <Link href={`/events/edit/${data.id}`}>
+          <Link href={`/events/edit/${data?.id}`}>
             <FaPencilAlt /> Edit event
           </Link>
-          <a href="#" className={styles.delete} onClick={deleteEvent}>
+          <a
+            href="#"
+            className={styles.delete}
+            onClick={() => console.log("Delete")}
+          >
             <FaTimes /> Delete item
           </a>
         </div>
         <span>
-          {data.date} at {data.time}
+          {data?.date} at {data?.time}
         </span>
-        <h1>{data.name}</h1>
-        {data.image && (
+        <h1>{data?.name}</h1>
+        {data?.image && (
           <div className={styles.image}>
             <Image
-              src={data.image}
-              width={960}
-              height={600}
+              src={data?.image}
+              width={860}
+              height={500}
               alt="event-image"
             />
           </div>
         )}
         <h3>Description:</h3>
-        <p>{data.description}</p>
+        <p>{data?.description}</p>
         <h3>Venue:</h3>
-        <p>{data.address}</p>
+        <p>{data?.address}</p>
         <Link href="/events" className={styles.back}>
           {"<"} Back to the events
         </Link>
@@ -65,16 +71,17 @@ export const getStaticPaths = async () => {
   };
 };
 
-export const getStaticProps = async ({params}: {params: {slug: string}}) => {
-  console.log(params.slug);
-  const res = await fetch(`http://localhost:3000/api/${params.slug}`);
-  const evts = await res.json();
+export const getStaticProps = wrapper.getStaticProps(
+  (store) =>
+    async ({params}: any) => {
+      const res = await fetch(`http://localhost:3000/api/${params.slug}`);
+      const evts = await res.json();
+      await store.dispatch(fetchData(evts) as any);
 
-  return {
-    props: {
-      data: evts,
-    },
-  };
-};
+      return {
+        props: {},
+      };
+    }
+);
 
 export default SingleEvent;
